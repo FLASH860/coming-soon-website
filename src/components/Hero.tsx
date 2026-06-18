@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, type MotionValue, useTransform } from 'framer-motion'
-import { SHIELD_SLIDES } from '../themes'
+import { THEMES } from '../themes'
 
 interface Props {
   px: MotionValue<number>
   py: MotionValue<number>
+  theme: number
+  onThemeChange: (i: number) => void
 }
 
 const container = {
@@ -16,32 +17,21 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
-const SLIDE_MS = 4000
-
-export function Hero({ px, py }: Props) {
-  const [slide, setSlide] = useState(0)
-
-  // Auto-rotate the shield images every 4 seconds.
-  useEffect(() => {
-    const id = setInterval(() => {
-      setSlide((s) => (s + 1) % SHIELD_SLIDES.length)
-    }, SLIDE_MS)
-    return () => clearInterval(id)
-  }, [])
-
+export function Hero({ px, py, theme, onThemeChange }: Props) {
   // Floating visual parallax — moves with cursor for an interactive feel.
   const visX = useTransform(px, [-0.5, 0.5], [-22, 22])
   const visY = useTransform(py, [-0.5, 0.5], [-16, 16])
   const copyX = useTransform(px, [-0.5, 0.5], [8, -8])
 
-  const active = SHIELD_SLIDES[slide]
+  const active = THEMES[theme]
 
   return (
     <section className="hero" id="top">
       <div className="container hero__grid">
         <motion.div className="hero__copy" variants={container} initial="hidden" animate="show" style={{ x: copyX }}>
-          <motion.span className="eyebrow" variants={item}>
-            <span className="dot" /> Coming soon
+          <motion.span className="coming-soon" variants={item}>
+            <span className="coming-soon__pulse" aria-hidden="true" />
+            Coming Soon
           </motion.span>
 
           <motion.h1 className="hero__title" variants={item}>
@@ -49,16 +39,19 @@ export function Hero({ px, py }: Props) {
           </motion.h1>
 
           <motion.p className="hero__sub" variants={item}>
-            Property Wallet is on its way. We&apos;re building a secure home for your property records, deeds and family
-            legacy. The site isn&apos;t live just yet — leave your email and you&apos;ll be the first to know when we launch.
+            Property Wallet is on its way — a secure home for your property records, deeds and family legacy. We&apos;re
+            opening a limited number of priority memberships before launch. Claim yours and be first through the door.
           </motion.p>
 
-          <motion.form className="notify" variants={item} onSubmit={(e) => e.preventDefault()}>
-            <input type="email" className="notify__input" placeholder="you@email.com" aria-label="Email address" required />
-            <button type="submit" className="btn btn--primary btn--lg">
-              Notify Me
-            </button>
-          </motion.form>
+          <motion.div className="hero__cta" variants={item}>
+            <a href="#signup" className="btn btn--primary btn--xl">
+              Become a Priority Member Now
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </a>
+            <span className="hero__cta-note">Limited founding spots · No payment required</span>
+          </motion.div>
         </motion.div>
 
         <motion.div
@@ -77,8 +70,8 @@ export function Hero({ px, py }: Props) {
               <AnimatePresence mode="wait">
                 <motion.img
                   key={active.id}
-                  src={active.src}
-                  alt={active.alt}
+                  src={active.shield}
+                  alt={active.shieldAlt}
                   className="shield-img"
                   initial={{ opacity: 0, scale: 1.04 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -87,16 +80,21 @@ export function Hero({ px, py }: Props) {
                 />
               </AnimatePresence>
 
-              <div className="shield-dots" role="tablist" aria-label="Shield image">
-                {SHIELD_SLIDES.map((s, i) => (
+              <div className="shield-meta">
+                <span className="shield-meta__dot" aria-hidden="true" />
+                {active.label}
+              </div>
+
+              <div className="shield-dots" role="tablist" aria-label="Visual theme">
+                {THEMES.map((t, i) => (
                   <button
-                    key={s.id}
+                    key={t.id}
                     type="button"
-                    className={`shield-dot ${i === slide ? 'is-active' : ''}`}
-                    aria-label={`Show image ${i + 1}`}
-                    aria-selected={i === slide}
+                    className={`shield-dot ${i === theme ? 'is-active' : ''}`}
+                    aria-label={`Show ${t.label}`}
+                    aria-selected={i === theme}
                     role="tab"
-                    onClick={() => setSlide(i)}
+                    onClick={() => onThemeChange(i)}
                   />
                 ))}
               </div>
