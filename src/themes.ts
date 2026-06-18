@@ -1,47 +1,40 @@
 import bgGreen from './assets/bg-green.png'
-import bgUrban from './assets/bg-urban.png'
-import bgResidential from './assets/bg-residential.png'
+import shieldGreen from './assets/shield-green.png'
+import shieldResidential from './assets/shield-residential.png'
+import shieldUrban from './assets/shield-urban.png'
 
-export interface Theme {
-  id: string
-  name: string
-  tagline: string
-  image: string
-  accent: string
-  accent2: string
-  accentSoft: string
-  glow: string
+// Single locked green palette for the whole site.
+export const GREEN = {
+  accent: '#1f9d6b',
+  accent2: '#0f6b48',
+  accentSoft: 'rgba(31, 157, 107, 0.12)',
+  glow: 'rgba(31, 157, 107, 0.35)',
 }
 
-export const THEMES: Theme[] = [
+// Background image used behind the page.
+export const BG_IMAGE = bgGreen
+
+// Shield hero images that auto-rotate every 4 seconds.
+export interface ShieldSlide {
+  id: string
+  src: string
+  alt: string
+}
+
+export const SHIELD_SLIDES: ShieldSlide[] = [
   {
     id: 'green',
-    name: 'Green Legacy',
-    tagline: 'Family wealth, rooted for generations',
-    image: bgGreen,
-    accent: '#1f9d6b',
-    accent2: '#0f6b48',
-    accentSoft: 'rgba(31, 157, 107, 0.12)',
-    glow: 'rgba(31, 157, 107, 0.35)',
-  },
-  {
-    id: 'urban',
-    name: 'Urban Commercial',
-    tagline: 'Commercial assets, precisely tracked',
-    image: bgUrban,
-    accent: '#1f86c8',
-    accent2: '#0f5586',
-    accentSoft: 'rgba(31, 134, 200, 0.12)',
-    glow: 'rgba(31, 134, 200, 0.35)',
+    src: shieldGreen,
+    alt: 'Property Wallet shield standing in lush green countryside',
   },
   {
     id: 'residential',
-    name: 'Peaceful Residential',
-    tagline: 'Homes passed down with care',
-    image: bgResidential,
-    accent: '#c79237',
-    accent2: '#9a6c1e',
-    accentSoft: 'rgba(199, 146, 55, 0.14)',
-    glow: 'rgba(199, 146, 55, 0.38)',
+    src: shieldResidential,
+    alt: 'Property Wallet shield in a peaceful residential neighborhood',
+  },
+  {
+    id: 'urban',
+    src: shieldUrban,
+    alt: 'Property Wallet shield in a modern urban commercial district',
   },
 ]

@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-const LINKS = [
-  { label: 'Features', href: '#features' },
-  { label: 'How it works', href: '#how' },
-  { label: 'Trust', href: '#trust' },
-  { label: 'Stories', href: '#stories' },
-]
+const LINKS = [{ label: 'Features', href: '#features' }]
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false)
@@ -50,8 +45,8 @@ export function Nav() {
           ))}
         </nav>
 
-        <a href="#waitlist" className="btn btn--primary btn--sm">
-          Become a Priority Member
+        <a href="#top" className="btn btn--primary btn--sm">
+          Notify Me
         </a>
       </div>
     </motion.header>

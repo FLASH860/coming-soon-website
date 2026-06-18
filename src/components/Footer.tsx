@@ -22,9 +22,9 @@ export function Footer() {
         </div>
 
         <nav className="footer__links" aria-label="Footer">
-          <a href="#waitlist">Contact</a>
-          <a href="#waitlist">Privacy Policy</a>
-          <a href="#waitlist">Terms</a>
+          <a href="#top">Contact</a>
+          <a href="#top">Privacy Policy</a>
+          <a href="#top">Terms</a>
         </nav>
       </div>
 
