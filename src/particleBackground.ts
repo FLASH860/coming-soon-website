@@ -16,7 +16,10 @@ function startParticleBackground() {
 
   const canvas = document.createElement('canvas')
   canvas.id = 'particle-bg'
-  document.body.appendChild(canvas)
+  // Mount inside #root so the canvas shares the same stacking context as the
+  // themed background layer (.bg-stage). Falls back to body if root is missing.
+  const mount = document.getElementById('root') ?? document.body
+  mount.appendChild(canvas)
 
   const ctx = canvas.getContext('2d')
   if (!ctx) return
