@@ -40,17 +40,6 @@
     radial-gradient(120% 80% at 50% 0%, rgba(250, 249, 246, 0.2) 0%, rgba(250, 249, 246, 0.78) 70%);
 }
 
-.bg-veil {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(90% 70% at 15% 12%, var(--accent-soft), transparent 60%),
-    radial-gradient(80% 70% at 100% 100%, var(--accent-soft), transparent 60%);
-  opacity: 0.9;
-  transition: background 0.8s ease;
-  pointer-events: none;
-}
-
 .bg-glow {
   position: absolute;
   inset: 0;
@@ -83,11 +72,6 @@
 .btn--lg {
   padding: 16px 30px;
   font-size: 1.02rem;
-}
-.btn--xl {
-  padding: 20px 38px;
-  font-size: 1.12rem;
-  font-weight: 700;
 }
 .btn--block {
   width: 100%;
@@ -161,12 +145,6 @@
   box-shadow: 0 6px 16px -6px var(--glow, rgba(0, 0, 0, 0.3));
   transition: background 0.5s ease;
 }
-.brand__shield {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(20, 24, 26, 0.22));
-}
 
 .nav__links {
   display: flex;
@@ -233,61 +211,32 @@
   max-width: 33ch;
   line-height: 1.55;
 }
-/* Big "Coming Soon" badge */
-.coming-soon {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: clamp(1.05rem, 2vw, 1.5rem);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-2);
-  padding: 12px 22px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  border: 1px solid var(--accent-soft);
-  box-shadow: 0 10px 30px -14px var(--glow, rgba(0, 0, 0, 0.3));
-  transition: color 0.7s ease, background 0.7s ease;
-}
-.coming-soon__pulse {
-  position: relative;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-.coming-soon__pulse::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulsering 1.8s ease-out infinite;
-}
-@keyframes pulsering {
-  0% {
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(3);
-    opacity: 0;
-  }
-}
-
-.hero__cta {
+.notify {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 14px;
-  margin-top: 38px;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+  max-width: 460px;
 }
-.hero__cta-note {
-  font-size: 0.92rem;
-  font-weight: 500;
+.notify__input {
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: 1rem;
+  color: var(--ink);
+  padding: 0 18px;
+  height: 54px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.notify__input::placeholder {
   color: var(--ink-faint);
+}
+.notify__input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
 }
 
 /* Hero visual */
@@ -317,30 +266,6 @@
   height: 100%;
   object-fit: cover;
 }
-.shield-meta {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--ink);
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(10px);
-  border: 1px solid var(--line);
-}
-.shield-meta__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  transition: background 0.6s ease;
-}
-
 .shield-dots {
   position: absolute;
   bottom: 16px;
@@ -1011,173 +936,6 @@
     padding: 24px;
   }
   .waitlist__card {
-    padding: 24px;
-  }
-}
-
-/* ============================================================
-   Signup / Priority membership
-   ============================================================ */
-.signup {
-  position: relative;
-  padding: 40px 0 120px;
-  scroll-margin-top: 90px;
-}
-.signup__shell {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 50px;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid var(--line);
-  border-radius: 30px;
-  padding: 56px;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(14px);
-  overflow: hidden;
-}
-.signup__glow {
-  position: absolute;
-  top: -40%;
-  right: -12%;
-  width: 62%;
-  height: 170%;
-  background: radial-gradient(circle, var(--accent-soft), transparent 70%);
-  pointer-events: none;
-  transition: background 0.8s ease;
-}
-.signup__copy {
-  position: relative;
-}
-.signup__title {
-  font-size: clamp(2rem, 3.4vw, 2.9rem);
-  font-weight: 800;
-  margin-top: 18px;
-}
-.signup__sub {
-  margin-top: 16px;
-  font-size: 1.08rem;
-  color: var(--ink-soft);
-  line-height: 1.6;
-}
-.signup__perks {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-  margin-top: 26px;
-}
-.signup__perks li {
-  position: relative;
-  padding-left: 30px;
-  font-size: 1rem;
-  color: var(--ink);
-}
-.signup__perks li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 3px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  box-shadow: inset 0 0 0 2px var(--accent);
-  transition: box-shadow 0.6s ease, background 0.6s ease;
-}
-
-.signup__card {
-  position: relative;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  padding: 32px;
-  box-shadow: var(--shadow-md);
-}
-.signup__card-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-.signup__form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-.field__label {
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-}
-.field__input {
-  padding: 14px 15px;
-  font-size: 0.98rem;
-  color: var(--ink);
-  background: rgba(250, 249, 246, 0.6);
-  border: 1px solid var(--line-strong);
-  border-radius: 12px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-.field__input::placeholder {
-  color: var(--ink-faint);
-}
-.field__input:focus {
-  outline: none;
-  background: #fff;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 4px var(--accent-soft);
-}
-.signup__fine {
-  text-align: center;
-  font-size: 0.8rem;
-  color: var(--ink-faint);
-}
-.signup__success {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  padding: 26px 6px;
-}
-.signup__check {
-  display: grid;
-  place-items: center;
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: var(--accent-soft);
-  color: var(--accent);
-  transition: background 0.6s ease, color 0.6s ease;
-}
-.signup__success h3 {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-.signup__success p {
-  color: var(--ink-soft);
-  font-size: 0.98rem;
-  max-width: 36ch;
-}
-
-@media (max-width: 880px) {
-  .signup__shell {
-    grid-template-columns: 1fr;
-    padding: 34px;
-    gap: 32px;
-  }
-}
-@media (max-width: 480px) {
-  .signup__shell {
-    padding: 24px;
-  }
-  .signup__card {
     padding: 24px;
   }
 }
